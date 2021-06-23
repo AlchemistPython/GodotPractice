@@ -1,0 +1,303 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Themes/Panel.tres" type="Theme" id=1]
+[ext_resource path="res://Themes/button.tres" type="Theme" id=2]
+[ext_resource path="res://Scripts/Calculadora.gd" type="Script" id=3]
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 400.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 400, 600 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 400, 100 )
+size_flags_horizontal = 7
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Panel"]
+margin_right = 400.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 380, 100 )
+theme = ExtResource( 1 )
+text = "PROBANDO"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row_1" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 400.0
+margin_bottom = 215.0
+rect_min_size = Vector2( 380, 90 )
+size_flags_vertical = 3
+
+[node name="Erase" type="Button" parent="MarginContainer/VBoxContainer/Row_1"]
+margin_right = 97.0
+margin_bottom = 111.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "C"
+
+[node name="Divide" type="Button" parent="MarginContainer/VBoxContainer/Row_1"]
+margin_left = 101.0
+margin_right = 198.0
+margin_bottom = 111.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "/"
+
+[node name="Multiply" type="Button" parent="MarginContainer/VBoxContainer/Row_1"]
+margin_left = 202.0
+margin_right = 299.0
+margin_bottom = 111.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "X"
+
+[node name="Delete" type="Button" parent="MarginContainer/VBoxContainer/Row_1"]
+margin_left = 303.0
+margin_right = 400.0
+margin_bottom = 111.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "<"
+
+[node name="Row_2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 219.0
+margin_right = 400.0
+margin_bottom = 330.0
+rect_min_size = Vector2( 380, 90 )
+size_flags_vertical = 3
+
+[node name="7" type="Button" parent="MarginContainer/VBoxContainer/Row_2"]
+margin_right = 97.0
+margin_bottom = 111.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "7"
+
+[node name="8" type="Button" parent="MarginContainer/VBoxContainer/Row_2"]
+margin_left = 101.0
+margin_right = 198.0
+margin_bottom = 111.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "8"
+
+[node name="9" type="Button" parent="MarginContainer/VBoxContainer/Row_2"]
+margin_left = 202.0
+margin_right = 299.0
+margin_bottom = 111.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "9"
+
+[node name="Substraction" type="Button" parent="MarginContainer/VBoxContainer/Row_2"]
+margin_left = 303.0
+margin_right = 400.0
+margin_bottom = 111.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "-"
+
+[node name="Row_3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 334.0
+margin_right = 400.0
+margin_bottom = 446.0
+rect_min_size = Vector2( 380, 90 )
+size_flags_vertical = 3
+
+[node name="4" type="Button" parent="MarginContainer/VBoxContainer/Row_3"]
+margin_right = 97.0
+margin_bottom = 112.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "4"
+
+[node name="5" type="Button" parent="MarginContainer/VBoxContainer/Row_3"]
+margin_left = 101.0
+margin_right = 198.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "5"
+
+[node name="6" type="Button" parent="MarginContainer/VBoxContainer/Row_3"]
+margin_left = 202.0
+margin_right = 299.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "6"
+
+[node name="Add" type="Button" parent="MarginContainer/VBoxContainer/Row_3"]
+margin_left = 303.0
+margin_right = 400.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 5.81
+theme = ExtResource( 2 )
+text = "+"
+
+[node name="Row_4" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 450.0
+margin_right = 400.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 380, 150 )
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Row_4"]
+margin_right = 286.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 286, 150 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Row_4/VBoxContainer"]
+margin_right = 286.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="1" type="Button" parent="MarginContainer/VBoxContainer/Row_4/VBoxContainer/HBoxContainer"]
+margin_right = 92.0
+margin_bottom = 73.0
+size_flags_horizontal = 7
+size_flags_vertical = 5
+size_flags_stretch_ratio = 1.51
+theme = ExtResource( 2 )
+text = "1"
+
+[node name="2" type="Button" parent="MarginContainer/VBoxContainer/Row_4/VBoxContainer/HBoxContainer"]
+margin_left = 96.0
+margin_right = 189.0
+margin_bottom = 73.0
+size_flags_horizontal = 7
+size_flags_vertical = 5
+size_flags_stretch_ratio = 1.51
+theme = ExtResource( 2 )
+text = "2"
+
+[node name="3" type="Button" parent="MarginContainer/VBoxContainer/Row_4/VBoxContainer/HBoxContainer"]
+margin_left = 193.0
+margin_right = 286.0
+margin_bottom = 73.0
+size_flags_horizontal = 7
+size_flags_vertical = 5
+size_flags_stretch_ratio = 1.51
+theme = ExtResource( 2 )
+text = "3"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Row_4/VBoxContainer"]
+margin_top = 77.0
+margin_right = 286.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="0" type="Button" parent="MarginContainer/VBoxContainer/Row_4/VBoxContainer/HBoxContainer2"]
+margin_right = 286.0
+margin_bottom = 73.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+size_flags_stretch_ratio = 4.02
+theme = ExtResource( 2 )
+text = "0"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Row_4"]
+margin_left = 290.0
+margin_right = 400.0
+margin_bottom = 150.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+
+[node name="Equal" type="Button" parent="MarginContainer/VBoxContainer/Row_4/VBoxContainer2"]
+margin_right = 110.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 70, 150 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+theme = ExtResource( 2 )
+text = "="
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_1/Erase" to="." method="_on_Erase_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_1/Divide" to="." method="_on_Divide_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_1/Multiply" to="." method="_on_Multiply_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_1/Delete" to="." method="_on_Delete_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_2/7" to="." method="_on_7_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_2/8" to="." method="_on_8_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_2/9" to="." method="_on_9_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_2/Substraction" to="." method="_on_Substraction_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_3/4" to="." method="_on_4_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_3/5" to="." method="_on_5_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_3/6" to="." method="_on_6_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_3/Add" to="." method="_on_Add_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_4/VBoxContainer/HBoxContainer/1" to="." method="_on_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_4/VBoxContainer/HBoxContainer/2" to="." method="_on_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_4/VBoxContainer/HBoxContainer/3" to="." method="_on_3_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_4/VBoxContainer/HBoxContainer2/0" to="." method="_on_0_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Row_4/VBoxContainer2/Equal" to="." method="_on_Equal_pressed"]
