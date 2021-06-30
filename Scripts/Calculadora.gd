@@ -6,10 +6,13 @@ onready var display:Label = $MarginContainer/VBoxContainer/Panel/Label;
 # Constants
 enum NUMBERS{zero,one,two,three,fourth,five,six,seven,eight,nine};
 # Aritmetic Operators
-var operators:Dictionary = {'add':'+','sub':'-','mul':'*','div':'/'};
+var operators:Dictionary = {
+	'add':'+',
+	'sub':'-',
+	'mul':'*',
+	'div':'/'
+};
 # Here I gonna save the numbers and the operators to make 
-var numbers:Array;
-var alm_operators:Array;
 var aritmetic_operation:Array;
 # Where i gonna content the numbers
 var num_1:float;
@@ -20,7 +23,28 @@ func _ready():
 	display.text = "";
 
 func _on_Equal_pressed():
-	save_it();
+	pass
+#	save_it();
+
+func _making_operation() -> float:
+	var result: float;
+	var num_before:float;
+	var num_after:float;
+	var lenght: int = len(display.text);
+	# this only loop once the string
+	for index in range(lenght):
+		# check if this is correct, because if the value is +-/*, maybe will generate an issue
+		num_after = display.text[index+1] as float
+		num_before = display.text[index-1] as float
+		if display.text[index] == operators.mul:
+			result = _math_operation(operators.mul,num_before,num_after);
+		elif display.text[index] == operators.div:
+			result = _math_operation(operators.div,num_before,num_after);
+		elif display.text[index] == operators.add:
+			result = _math_operation(operators.add,num_before,num_after);
+		else:
+			result = _math_operation(operators.sub,num_before,num_after);
+	return result
 
 func save_it() -> void:
 	# local variables temp number and lenght of the label
@@ -44,12 +68,6 @@ func save_it() -> void:
 			# save the operator
 			aritmetic_operation.append(display.text[element])
 #	print("Valores: ",aritmetic_operation)
-	
-func make_operation(value:String, numbers:Array, operators:Array) -> void:
-	if '*' in operators or '/' in operators:
-		pass
-	else:
-		pass
 
 func _on_Erase_pressed():
 	# reset all the text
@@ -63,22 +81,21 @@ func _on_Delete_pressed():
 	# this avoid that len comes less than 0 i.e. -1
 	if get_size_display >= 0:
 		display.text[get_size_display] = '';
-		
+
 # Aritmetic operators
-func _math_operation(operation):
+func _math_operation(operation:String, num_1:float,num_2:float) ->float:
+	var operation_result:float;
 	match operation:
 		"+":
-			num_1 += num_2
-#			print("Result: ",result_operation)
+			operation_result = num_1 + num_2
 		"-":
-			num_1 -= num_2
-#			print("Result: ",result_operation)
+			operation_result = num_1 - num_2
 		"/":
-			num_1 /= num_2
-#			print("Result: ",result_operation)
+			operation_result = num_1 / num_2
 		"*":
-			num_1 *= num_2
-#			print("Result: ",result_operation)
+			operation_result = num_1 * num_2
+	return operation_result
+
 # this function will get the size of the label
 func _find_operator(text:String) -> int:
 	var number:int = len(text);
