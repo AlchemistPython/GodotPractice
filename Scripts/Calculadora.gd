@@ -7,12 +7,13 @@ onready var display:Label = $MarginContainer/VBoxContainer/Panel/Label;
 enum NUMBERS{zero,one,two,three,fourth,five,six,seven,eight,nine};
 # Aritmetic Operators
 var operators:Dictionary = {
+	'mul':'*',
+	'div':'/',
 	'add':'+',
 	'sub':'-',
-	'mul':'*',
-	'div':'/'
 };
-# Here I gonna save the numbers and the operators to make 
+# Array where save operators and the complete string 
+var sort_operators:Array;
 var aritmetic_operation:Array;
 # Where i gonna content the numbers
 var num_1:float;
@@ -23,28 +24,8 @@ func _ready():
 	display.text = "";
 
 func _on_Equal_pressed():
-	pass
-#	save_it();
-
-func _making_operation() -> float:
-	var result: float;
-	var num_before:float;
-	var num_after:float;
-	var lenght: int = len(display.text);
-	# this only loop once the string
-	for index in range(lenght):
-		# check if this is correct, because if the value is +-/*, maybe will generate an issue
-		num_after = display.text[index+1] as float
-		num_before = display.text[index-1] as float
-		if display.text[index] == operators.mul:
-			result = _math_operation(operators.mul,num_before,num_after);
-		elif display.text[index] == operators.div:
-			result = _math_operation(operators.div,num_before,num_after);
-		elif display.text[index] == operators.add:
-			result = _math_operation(operators.add,num_before,num_after);
-		else:
-			result = _math_operation(operators.sub,num_before,num_after);
-	return result
+	save_it();
+	_operation();
 
 func save_it() -> void:
 	# local variables temp number and lenght of the label
@@ -67,7 +48,45 @@ func save_it() -> void:
 			temp = ''# reset the number
 			# save the operator
 			aritmetic_operation.append(display.text[element])
-#	print("Valores: ",aritmetic_operation)
+#	print("Array: ",aritmetic_operation);
+
+func _operation() -> float:
+	# Variables
+	var counter: int = 0;
+	var result: float;
+	var num_1:float;
+	var num_2:float;
+	# another issue, is if the value */ it's the final the number its the last save
+	while counter < aritmetic_operation.size():
+		num_1 = 0 if aritmetic_operation[counter - 1] in operators.values() else aritmetic_operation[counter - 1]
+		num_2 = 0 if aritmetic_operation[counter + 1] in operators.values() else aritmetic_operation[counter + 1]
+		if '*' in aritmetic_operation or '/' in aritmetic_operation:
+			if aritmetic_operation[counter] == '*':
+				result = num_1 * num_2
+				# remove the element
+				# replace the element for result
+				# reset the counter
+				aritmetic_operation.remove(counter - 1);
+				aritmetic_operation.remove(counter);
+				aritmetic_operation.remove(counter + 1);
+				aritmetic_operation.insert(counter - 1, result);
+			elif aritmetic_operation[counter] == '/':
+				result = num_1 / num_2
+				# remove the element
+				# replace the element for result
+				# reset the counter
+				# change for a function for reduce the code
+				aritmetic_operation.remove(counter - 1);
+				aritmetic_operation.remove(counter);
+				aritmetic_operation.remove(counter + 1);
+				aritmetic_operation.insert(counter - 1, result);
+			counter += 1;
+		else:
+			if aritmetic_operation[counter] == '+':
+				result = num_1 + num_2
+			elif aritmetic_operation[counter] == '-':
+				result = num_1 - num_2
+	return result;
 
 func _on_Erase_pressed():
 	# reset all the text
