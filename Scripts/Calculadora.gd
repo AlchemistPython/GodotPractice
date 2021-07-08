@@ -1,6 +1,6 @@
 extends Control
 
-# Variables
+# =============================== Variables ==================================
 var temp:float;
 onready var display:Label = $MarginContainer/VBoxContainer/Panel/Label;
 # Constants
@@ -14,19 +14,15 @@ var operators:Dictionary = {
 };
 # Array where save operators and the complete string 
 var sort_operators:Array;
-var aritmetic_operation:Array;
-# Where i gonna content the numbers
-var num_1:float;
-var num_2:float;
-
+var chain:Array;
+# ========================================================================
 # Reset the text 'Probando' instead is empty
 func _ready():
 	display.text = "";
 
 func _on_Equal_pressed():
 	save_it();
-	_operation();
-
+# Here I save the String from the label in the array chain
 func save_it() -> void:
 	# local variables temp number and lenght of the label
 	var temp:String;
@@ -40,59 +36,57 @@ func save_it() -> void:
 			# if the lenght of the label it's out of the index
 			if element+1 == lenght:
 				# save it in the array
-				aritmetic_operation.append(temp as float)
+				chain.append(temp as float)
 		# if exist an operator after a number
 		elif display.text[element] in operators.values():
 			# save first the number
-			aritmetic_operation.append(temp as float)
+			chain.append(temp as float)
 			temp = ''# reset the number
 			# save the operator
-			aritmetic_operation.append(display.text[element])
-#	print("Array: ",aritmetic_operation);
+			chain.append(display.text[element])
 
-func _operation() -> float:
+# this return the counter to 0
+func _remove(index:int,value:float,list:Array) -> int:
+	list.insert(index, value);
+	list.remove(index-1);
+	list.remove(index+1);
+	return 0
+
+# function to make the operations
+func _operation(operator:String, n1:float, n2:float) -> float:
+	var operation_result: float;
+	match operator:
+		operators.mul:
+			operation_result = n1 * n2
+		operators.div:
+			operation_result = n1 / n2
+		operators.add:
+			operation_result = n1 + n2
+		operators.sub:
+			operation_result = n1 - n2
+	return operation_result;
+
+func _reading_the_chain() -> void:
 	# Variables
-	var counter: int = 0;
-	var result: float;
-	var num_1:float;
-	var num_2:float;
-	# another issue, is if the value */ it's the final the number its the last save
-	while counter < aritmetic_operation.size():
-		num_1 = 0 if aritmetic_operation[counter - 1] in operators.values() else aritmetic_operation[counter - 1]
-		num_2 = 0 if aritmetic_operation[counter + 1] in operators.values() else aritmetic_operation[counter + 1]
-		if '*' in aritmetic_operation or '/' in aritmetic_operation:
-			if aritmetic_operation[counter] == '*':
-				result = num_1 * num_2
-				# remove the element
-				# replace the element for result
-				# reset the counter
-				aritmetic_operation.remove(counter - 1);
-				aritmetic_operation.remove(counter);
-				aritmetic_operation.remove(counter + 1);
-				aritmetic_operation.insert(counter - 1, result);
-			elif aritmetic_operation[counter] == '/':
-				result = num_1 / num_2
-				# remove the element
-				# replace the element for result
-				# reset the counter
-				# change for a function for reduce the code
-				aritmetic_operation.remove(counter - 1);
-				aritmetic_operation.remove(counter);
-				aritmetic_operation.remove(counter + 1);
-				aritmetic_operation.insert(counter - 1, result);
-			counter += 1;
-		else:
-			if aritmetic_operation[counter] == '+':
-				result = num_1 + num_2
-			elif aritmetic_operation[counter] == '-':
-				result = num_1 - num_2
-	return result;
+	var size:int = chain.size();
+	var counter:int = 0;
+	var operator:String;
+	var num1: float;
+	var num2: float;
+	while true:
+		if size == 1:
+			break;
+		# problem with ternary operator
+#		elif operators['mul','div'] in chain:
+#			pass
+		counter += 1
+
 
 func _on_Erase_pressed():
 	# reset all the text
 	display.text = ""
 	# reset the arrays
-	aritmetic_operation.clear()
+	chain.clear()
 
 func _on_Delete_pressed():
 	# get the size of the label
@@ -100,20 +94,6 @@ func _on_Delete_pressed():
 	# this avoid that len comes less than 0 i.e. -1
 	if get_size_display >= 0:
 		display.text[get_size_display] = '';
-
-# Aritmetic operators
-func _math_operation(operation:String, num_1:float,num_2:float) ->float:
-	var operation_result:float;
-	match operation:
-		"+":
-			operation_result = num_1 + num_2
-		"-":
-			operation_result = num_1 - num_2
-		"/":
-			operation_result = num_1 / num_2
-		"*":
-			operation_result = num_1 * num_2
-	return operation_result
 
 # this function will get the size of the label
 func _find_operator(text:String) -> int:
