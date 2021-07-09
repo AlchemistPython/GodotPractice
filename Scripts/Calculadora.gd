@@ -75,37 +75,56 @@ func _reading_the_chain() -> void:
 	var num2: float;
 	var result: float;
 	# chain = [66,+,5,*,8,/,22,-,33,*,4]; size = 11
+	# replantear el loop while con el counter
 	while true:
 		if size == 1:
 			break;
-		elif (operators.mul and operators.div) in chain:
-			print("Multiply and Divide exist");
-			if operators.mul == chain[counter]:
-				operator = chain[counter]
-				num1 = chain[counter - 1]
-				num2 = chain[counter + 1]
-				result = _operation(operator,num1,num2);
-				resizing = _remove(counter, result,chain);
-			elif operators.div == chain[counter]:
-				operator = chain[counter]
-				num1 = chain[counter - 1]
-				num2 = chain[counter + 1]
-				result = _operation(operator, num1, num2);
-		elif (operators.add and operators.sub) in chain:
-			print("Addition and Substraction exist");
-			if operators.add == chain[counter]:
+		for index in range(size):
+			if operators.mul in chain or operators.div in chain:
+				print("Multiply and Divide exist");
+				if operators.mul == chain[index]:
+					operator = chain[counter];
+					num1 = chain[counter - 1];
+					num2 = chain[counter + 1];
+					result = _operation(operator,num1,num2);
+					resizing = _remove(index, result, chain);
+					break;
+				elif operators.div == chain[index]:
+					operator = chain[counter];
+					num1 = chain[counter - 1];
+					num2 = chain[counter + 1];
+					result = _operation(operator,num1,num2);
+					resizing = _remove(index, result, chain);
+			elif operators.add in chain or operators.sub in chain:
 				pass
-			elif operators.sub == chain[counter]:
-				pass
-		# there's a problem if enter in the 1st elif, here there's no enter
-		elif !resizing:# false - enter
-			counter += 1
-			# debuggeando
-			print("Remove values: ",resizing,"\nCadena: ",chain,"'nCounter: ",counter);
-		elif resizing:# true - enter
-			counter = 0 
-			# debuggeando
-			print("Remove values: ",resizing,"\nCadena: ",chain,"'nCounter: ",counter);
+#		elif (operators.mul and operators.div) in chain:
+#			print("Multiply and Divide exist");
+#			if operators.mul == chain[counter]:
+#				operator = chain[counter]
+#				num1 = chain[counter - 1]
+#				num2 = chain[counter + 1]
+#				result = _operation(operator,num1,num2);
+#				resizing = _remove(counter, result,chain);
+#			elif operators.div == chain[counter]:
+#				operator = chain[counter]
+#				num1 = chain[counter - 1]
+#				num2 = chain[counter + 1]
+#				result = _operation(operator, num1, num2);
+#		elif (operators.add and operators.sub) in chain:
+#			print("Addition and Substraction exist");
+#			if operators.add == chain[counter]:
+#				pass
+#			elif operators.sub == chain[counter]:
+#				pass
+#		# there's a problem if enter in the 1st elif, here there's no enter
+#		elif !resizing:# false - enter
+#			counter += 1
+#			# debuggeando
+#			print("Remove values: ",resizing,"\nCadena: ",chain,"'nCounter: ",counter);
+#		elif resizing:# true - enter
+#			counter = 0 
+#			# debuggeando
+#			print("Remove values: ",resizing,"\nCadena: ",chain,"'nCounter: ",counter);
 
 
 func _on_Erase_pressed():
