@@ -46,40 +46,66 @@ func save_it() -> void:
 			chain.append(display.text[element])
 
 # this return the counter to 0
-func _remove(index:int,value:float,list:Array) -> int:
+func _remove(index:int,value:float,list:Array) -> bool:
 	list.insert(index, value);
 	list.remove(index-1);
 	list.remove(index+1);
-	return 0
+	return true;
 
 # function to make the operations
 func _operation(operator:String, n1:float, n2:float) -> float:
-	var operation_result: float;
 	match operator:
 		operators.mul:
-			operation_result = n1 * n2
+			n1 *= n2
 		operators.div:
-			operation_result = n1 / n2
+			n1 /= n2
 		operators.add:
-			operation_result = n1 + n2
+			n1 += n2
 		operators.sub:
-			operation_result = n1 - n2
-	return operation_result;
+			n1 -= n2
+	return n1;
 
 func _reading_the_chain() -> void:
 	# Variables
 	var size:int = chain.size();
+	var resizing: bool = false;
 	var counter:int = 0;
 	var operator:String;
 	var num1: float;
 	var num2: float;
+	var result: float;
+	# chain = [66,+,5,*,8,/,22,-,33,*,4]; size = 11
 	while true:
 		if size == 1:
 			break;
-		# problem with ternary operator
-#		elif operators['mul','div'] in chain:
-#			pass
-		counter += 1
+		elif (operators.mul and operators.div) in chain:
+			print("Multiply and Divide exist");
+			if operators.mul == chain[counter]:
+				operator = chain[counter]
+				num1 = chain[counter - 1]
+				num2 = chain[counter + 1]
+				result = _operation(operator,num1,num2);
+				resizing = _remove(counter, result,chain);
+			elif operators.div == chain[counter]:
+				operator = chain[counter]
+				num1 = chain[counter - 1]
+				num2 = chain[counter + 1]
+				result = _operation(operator, num1, num2);
+		elif (operators.add and operators.sub) in chain:
+			print("Addition and Substraction exist");
+			if operators.add == chain[counter]:
+				pass
+			elif operators.sub == chain[counter]:
+				pass
+		# there's a problem if enter in the 1st elif, here there's no enter
+		elif !resizing:# false - enter
+			counter += 1
+			# debuggeando
+			print("Remove values: ",resizing,"\nCadena: ",chain,"'nCounter: ",counter);
+		elif resizing:# true - enter
+			counter = 0 
+			# debuggeando
+			print("Remove values: ",resizing,"\nCadena: ",chain,"'nCounter: ",counter);
 
 
 func _on_Erase_pressed():
