@@ -22,6 +22,7 @@ func _ready():
 
 func _on_Equal_pressed():
 	save_it();
+	_reading_the_chain();
 # Here I save the String from the label in the array chain
 func save_it() -> void:
 	# local variables temp number and lenght of the label
@@ -45,13 +46,6 @@ func save_it() -> void:
 			# save the operator
 			chain.append(display.text[element])
 
-# this return the counter to 0
-func _remove(index:int,value:float,list:Array) -> bool:
-	list.insert(index, value);
-	list.remove(index-1);
-	list.remove(index+1);
-	return true;
-
 # function to make the operations
 func _operation(operator:String, n1:float, n2:float) -> float:
 	match operator:
@@ -65,67 +59,52 @@ func _operation(operator:String, n1:float, n2:float) -> float:
 			n1 -= n2
 	return n1;
 
+# this function remove the values using the arithmetic operators 
+func remove_values(list:Array,index:int,op:String,n1:float,n2:float)->void:
+	# Variables
+	var result:float;
+	# instead the function _operation
+	result = _operation(op,n1,n2);
+	# insert and remove values
+	list.insert(index, result);
+	list.remove(index - 1);
+	list.remove(index + 1);
+	print("Values: ",list)
+
 func _reading_the_chain() -> void:
 	# Variables
-	var size:int = chain.size();
-	var resizing: bool = false;
-	var counter:int = 0;
-	var operator:String;
-	var num1: float;
-	var num2: float;
-	var result: float;
+	var resizing: bool = true;
 	# chain = [66,+,5,*,8,/,22,-,33,*,4]; size = 11
 	# replantear el loop while con el counter
-	while true:
-		if size == 1:
-			break;
-		for index in range(size):
+	while resizing:
+		for index in range(chain.size()):
+			# multiply and divide
 			if operators.mul in chain or operators.div in chain:
-				print("Multiply and Divide exist");
-				if operators.mul == chain[index]:
-					operator = chain[counter];
-					num1 = chain[counter - 1];
-					num2 = chain[counter + 1];
-					result = _operation(operator,num1,num2);
-					resizing = _remove(index, result, chain);
+				print("Multiply and Divide there it is");
+				if operators.mul == chain[index] as String:
+					# list, index, operator, num1, num2
+					remove_values(chain,index,operators.mul,chain[index-1],chain[index+1]);
+					print("Cadena: ",chain);
 					break;
-				elif operators.div == chain[index]:
-					operator = chain[counter];
-					num1 = chain[counter - 1];
-					num2 = chain[counter + 1];
-					result = _operation(operator,num1,num2);
-					resizing = _remove(index, result, chain);
+				elif operators.div == chain[index] as String:
+					# list, index, operator, num1, num2
+					remove_values(chain,index,operators.div,chain[index-1],chain[index+1]);
+					print("Cadena: ",chain);
+					break;
 			elif operators.add in chain or operators.sub in chain:
-				pass
-#		elif (operators.mul and operators.div) in chain:
-#			print("Multiply and Divide exist");
-#			if operators.mul == chain[counter]:
-#				operator = chain[counter]
-#				num1 = chain[counter - 1]
-#				num2 = chain[counter + 1]
-#				result = _operation(operator,num1,num2);
-#				resizing = _remove(counter, result,chain);
-#			elif operators.div == chain[counter]:
-#				operator = chain[counter]
-#				num1 = chain[counter - 1]
-#				num2 = chain[counter + 1]
-#				result = _operation(operator, num1, num2);
-#		elif (operators.add and operators.sub) in chain:
-#			print("Addition and Substraction exist");
-#			if operators.add == chain[counter]:
-#				pass
-#			elif operators.sub == chain[counter]:
-#				pass
-#		# there's a problem if enter in the 1st elif, here there's no enter
-#		elif !resizing:# false - enter
-#			counter += 1
-#			# debuggeando
-#			print("Remove values: ",resizing,"\nCadena: ",chain,"'nCounter: ",counter);
-#		elif resizing:# true - enter
-#			counter = 0 
-#			# debuggeando
-#			print("Remove values: ",resizing,"\nCadena: ",chain,"'nCounter: ",counter);
-
+				print("Adding and Substraction there it is");
+				if operators.add == chain[index] as String:
+					# list, index, operator, num1, num2
+					remove_values(chain,index,operators.add,chain[index-1],chain[index+1]);
+					print("Cadena: ",chain);
+					break;
+				elif operators.sub == chain[index] as String:
+					# list, index, operator, num1, num2
+					remove_values(chain,index,operators.sub,chain[index-1],chain[index+1]);
+					print("Cadena: ",chain);
+					break;
+		if chain.size() == 1:
+			resizing = false;
 
 func _on_Erase_pressed():
 	# reset all the text
