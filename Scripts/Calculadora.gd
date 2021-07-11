@@ -13,7 +13,6 @@ var operators:Dictionary = {
 	'sub':'-',
 };
 # Array where save operators and the complete string 
-var sort_operators:Array;
 var chain:Array;
 # ========================================================================
 # Reset the text 'Probando' instead is empty
@@ -60,16 +59,17 @@ func _operation(operator:String, n1:float, n2:float) -> float:
 	return n1;
 
 # this function remove the values using the arithmetic operators 
-func remove_values(list:Array,index:int,op:String,n1:float,n2:float)->void:
+func remove_values(index:int,op:String,n1:float,n2:float)->void:
 	# Variables
 	var result:float;
+	# maybe use a loop for eliminate the values and after that insert the value
 	# instead the function _operation
 	result = _operation(op,n1,n2);
 	# insert and remove values
-	list.insert(index, result);
-	list.remove(index - 1);
-	list.remove(index + 1);
-	print("Values: ",list)
+	chain.remove(index);
+	chain.remove(index - 1);
+	chain.remove(index + 1);
+	chain.insert(index, result);
 
 func _reading_the_chain() -> void:
 	# Variables
@@ -83,24 +83,24 @@ func _reading_the_chain() -> void:
 				print("Multiply and Divide there it is");
 				if operators.mul == chain[index] as String:
 					# list, index, operator, num1, num2
-					remove_values(chain,index,operators.mul,chain[index-1],chain[index+1]);
+					remove_values(index,operators.mul,chain[index-1],chain[index+1]);
 					print("Cadena: ",chain);
 					break;
 				elif operators.div == chain[index] as String:
 					# list, index, operator, num1, num2
-					remove_values(chain,index,operators.div,chain[index-1],chain[index+1]);
+					remove_values(index,operators.div,chain[index-1],chain[index+1]);
 					print("Cadena: ",chain);
 					break;
 			elif operators.add in chain or operators.sub in chain:
 				print("Adding and Substraction there it is");
 				if operators.add == chain[index] as String:
 					# list, index, operator, num1, num2
-					remove_values(chain,index,operators.add,chain[index-1],chain[index+1]);
+					remove_values(index,operators.add,chain[index-1],chain[index+1]);
 					print("Cadena: ",chain);
 					break;
 				elif operators.sub == chain[index] as String:
 					# list, index, operator, num1, num2
-					remove_values(chain,index,operators.sub,chain[index-1],chain[index+1]);
+					remove_values(index,operators.sub,chain[index-1],chain[index+1]);
 					print("Cadena: ",chain);
 					break;
 		if chain.size() == 1:
