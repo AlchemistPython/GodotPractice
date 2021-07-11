@@ -14,7 +14,7 @@ var operators:Dictionary = {
 };
 # Array where save operators and the complete string 
 var chain:Array;
-# ========================================================================
+# ============================== Methods ======================================
 # Reset the text 'Probando' instead is empty
 func _ready():
 	display.text = "";
@@ -22,11 +22,14 @@ func _ready():
 func _on_Equal_pressed():
 	save_it();
 	_reading_the_chain();
+	display.text = chain[0] as String
 # Here I save the String from the label in the array chain
 func save_it() -> void:
+	# ========================== Variables ====================================
 	# local variables temp number and lenght of the label
 	var temp:String;
 	var lenght:int = len(display.text);
+	# ========================== Methods ======================================
 	# loop through the label
 	for element in range(lenght):
 		# check if are equal to numbers
@@ -59,52 +62,55 @@ func _operation(operator:String, n1:float, n2:float) -> float:
 	return n1;
 
 # this function remove the values using the arithmetic operators 
-func remove_values(index:int,op:String,n1:float,n2:float)->void:
-	# Variables
+func change_values(index:int)->void:
+	# ========================== Variables ====================================
 	var result:float;
-	# maybe use a loop for eliminate the values and after that insert the value
+	var op: String = chain[index];
+	var num1: float = chain[index - 1];
+	var num2: float = chain[index + 1];
+	var elements: Array = [num1,op,num2];
+	# ========================== Methods ======================================
 	# instead the function _operation
-	result = _operation(op,n1,n2);
-	# insert and remove values
-	chain.remove(index);
-	chain.remove(index - 1);
-	chain.remove(index + 1);
+	result = _operation(op,num1,num2);
+	# through the chain
 	chain.insert(index, result);
+	for element in elements:
+		chain.erase(element);
+	# inserting new value
 
 func _reading_the_chain() -> void:
-	# Variables
-	var resizing: bool = true;
-	# chain = [66,+,5,*,8,/,22,-,33,*,4]; size = 11
-	# replantear el loop while con el counter
+	# ========================== Variables ====================================
+	var resizing:bool = true;
+	var length: int = 0;
+	# chain = [66,+,5,'*',8,/,22,-,33,*,4]; size = 11
+	# ========================== Methods ======================================
 	while resizing:
-		for index in range(chain.size()):
-			# multiply and divide
+		print("Dentro del loop while infinito")
+		length = chain.size();
+		if length == 1:
+			resizing = false;
+		for element in range(length):
+			print("Dentro del loop for del array")
 			if operators.mul in chain or operators.div in chain:
-				print("Multiply and Divide there it is");
-				if operators.mul == chain[index] as String:
-					# list, index, operator, num1, num2
-					remove_values(index,operators.mul,chain[index-1],chain[index+1]);
+				print("Multiply and Divide!")
+				if typeof(chain[element]) == TYPE_STRING &&  chain[element] == operators.mul:
+					change_values(element);
 					print("Cadena: ",chain);
 					break;
-				elif operators.div == chain[index] as String:
-					# list, index, operator, num1, num2
-					remove_values(index,operators.div,chain[index-1],chain[index+1]);
+				elif typeof(chain[element]) == TYPE_STRING &&  chain[element] == operators.div:
+					change_values(element);
 					print("Cadena: ",chain);
 					break;
 			elif operators.add in chain or operators.sub in chain:
-				print("Adding and Substraction there it is");
-				if operators.add == chain[index] as String:
-					# list, index, operator, num1, num2
-					remove_values(index,operators.add,chain[index-1],chain[index+1]);
+				print("Adding and Substraction!")
+				if typeof(chain[element]) == TYPE_STRING &&  chain[element] == operators.add:
+					change_values(element);
 					print("Cadena: ",chain);
 					break;
-				elif operators.sub == chain[index] as String:
-					# list, index, operator, num1, num2
-					remove_values(index,operators.sub,chain[index-1],chain[index+1]);
+				elif typeof(chain[element]) == TYPE_STRING &&  chain[element] == operators.sub:
+					change_values(element);
 					print("Cadena: ",chain);
 					break;
-		if chain.size() == 1:
-			resizing = false;
 
 func _on_Erase_pressed():
 	# reset all the text
