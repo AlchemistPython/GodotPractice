@@ -14,13 +14,13 @@ _global_script_class_icons={
 
 [application]
 
-config/name="MarginContainer"
+config/name="Practice"
 run/main_scene="res://Scenes/LearningUI.tscn"
 config/icon="res://icon.png"
 
 [display]
 
-window/size/width=400
+window/size/height=768
 
 [rendering]
 
