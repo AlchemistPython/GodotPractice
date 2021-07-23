@@ -32,11 +32,11 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_right = 400.0
-margin_bottom = 600.0
+margin_right = 1024.0
+margin_bottom = 768.0
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_right = 400.0
+margin_right = 1024.0
 margin_bottom = 41.0
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 1 )
@@ -46,15 +46,15 @@ valign = 1
 
 [node name="ContainerCounter" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 45.0
-margin_right = 400.0
-margin_bottom = 320.0
+margin_right = 1024.0
+margin_bottom = 404.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Counter_1" type="Label" parent="MarginContainer/VBoxContainer/ContainerCounter"]
-margin_right = 130.0
-margin_bottom = 275.0
+margin_right = 338.0
+margin_bottom = 359.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
@@ -63,9 +63,9 @@ align = 1
 valign = 1
 
 [node name="Counter_2" type="Label" parent="MarginContainer/VBoxContainer/ContainerCounter"]
-margin_left = 134.0
-margin_right = 265.0
-margin_bottom = 275.0
+margin_left = 342.0
+margin_right = 681.0
+margin_bottom = 359.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
@@ -74,9 +74,9 @@ align = 1
 valign = 1
 
 [node name="Counter_3" type="Label" parent="MarginContainer/VBoxContainer/ContainerCounter"]
-margin_left = 269.0
-margin_right = 400.0
-margin_bottom = 275.0
+margin_left = 685.0
+margin_right = 1024.0
+margin_bottom = 359.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
@@ -85,78 +85,78 @@ align = 1
 valign = 1
 
 [node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 324.0
-margin_right = 400.0
-margin_bottom = 600.0
+margin_top = 408.0
+margin_right = 1024.0
+margin_bottom = 768.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Btn_counter_1" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
-margin_right = 130.0
-margin_bottom = 276.0
+margin_right = 338.0
+margin_bottom = 360.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="inc_count_1" type="Button" parent="MarginContainer/VBoxContainer/Buttons/Btn_counter_1"]
-margin_right = 63.0
-margin_bottom = 276.0
+margin_right = 167.0
+margin_bottom = 360.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
 text = "+"
 
 [node name="dec_count_1" type="Button" parent="MarginContainer/VBoxContainer/Buttons/Btn_counter_1"]
-margin_left = 67.0
-margin_right = 130.0
-margin_bottom = 276.0
+margin_left = 171.0
+margin_right = 338.0
+margin_bottom = 360.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
 text = "-"
 
 [node name="Btn_counter_2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
-margin_left = 134.0
-margin_right = 265.0
-margin_bottom = 276.0
+margin_left = 342.0
+margin_right = 681.0
+margin_bottom = 360.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="inc_count_2" type="Button" parent="MarginContainer/VBoxContainer/Buttons/Btn_counter_2"]
-margin_right = 63.0
-margin_bottom = 276.0
+margin_right = 167.0
+margin_bottom = 360.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
 text = "+"
 
 [node name="dec_count_2" type="Button" parent="MarginContainer/VBoxContainer/Buttons/Btn_counter_2"]
-margin_left = 67.0
-margin_right = 131.0
-margin_bottom = 276.0
+margin_left = 171.0
+margin_right = 339.0
+margin_bottom = 360.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
 text = "-"
 
 [node name="Btn_counter_3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
-margin_left = 269.0
-margin_right = 400.0
-margin_bottom = 276.0
+margin_left = 685.0
+margin_right = 1024.0
+margin_bottom = 360.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="inc_count_3" type="Button" parent="MarginContainer/VBoxContainer/Buttons/Btn_counter_3"]
-margin_right = 63.0
-margin_bottom = 276.0
+margin_right = 167.0
+margin_bottom = 360.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
 text = "+"
 
 [node name="dec_count_3" type="Button" parent="MarginContainer/VBoxContainer/Buttons/Btn_counter_3"]
-margin_left = 67.0
-margin_right = 131.0
-margin_bottom = 276.0
+margin_left = 171.0
+margin_right = 339.0
+margin_bottom = 360.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
